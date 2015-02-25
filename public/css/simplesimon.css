@@ -1,0 +1,43 @@
+body {
+	margin-top:20px;
+	margin-right: 300px;
+	margin-left: 300px;
+	margin-bottom: 200px
+}
+#game_container {
+	height: 500px;
+	width: 500px;
+	margin: 0px;
+	/*background-color: ;*/
+}
+.buttons {
+	font-family: Verdana;
+	font-size: 75px;
+	height: 200px;
+	width: 200px;
+	margin: 25px;
+	/*border: 3px solid green;*/
+	float: left;
+	/*margin: 25px;*/
+}
+#box1{
+	background-color: #9F70B9;
+}
+#box2{
+	background-color: #6C55E0;
+}
+#box3{
+	background-color: #408080;
+}
+#box4{
+	background-color: #E03662;
+}
+
+/**************************************/
+/*TODO: MAKE MAIN BOX AND BUTTONS*/
+/*TODO: RANDOMLY SELECT BUTTONS - THEY FADE IN, THEN OUT*/
+/*TODO: USER CAN CLICK THE BUTTON THAT WAS RANDOMIZED*/
+/*TODO: RANDOM SELECT AND THEN USER SELECT AND ADD RANDOM AGAIN*/
+/*TODO: CONTINUE PROCESS UNTIL USER MISSES A BUTTON*/
+/*TODO: INSTALL A CLICK COUNTER FOR USER*/
+
