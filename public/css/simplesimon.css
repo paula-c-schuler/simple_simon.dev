@@ -3,34 +3,71 @@ body {
 	margin-right: 300px;
 	margin-left: 300px;
 	margin-bottom: 200px
+	font-family: Verdana;
 }
 #game_container {
-	height: 500px;
-	width: 500px;
+	height: 400px;
+	width: 320px;
 	margin: 0px;
+	border: 3px blue solid;
 	/*background-color: ;*/
 }
+#buttons_container{
+	height: 410px;
+	width: 330px;
+	border-color: green 3px dashed;
+}
 .buttons {
-	font-family: Verdana;
+	/*font-family: Verdana;*/
 	font-size: 75px;
-	height: 200px;
-	width: 200px;
-	margin: 25px;
+	height: 150px;
+	width: 150px;
+	margin: 5px;
 	/*border: 3px solid green;*/
 	float: left;
+	opacity: .5 ;
 	/*margin: 25px;*/
 }
-#box1{
+#box0{
 	background-color: #9F70B9;
 }
-#box2{
+#box1{
 	background-color: #6C55E0;
 }
-#box3{
+#box2{
 	background-color: #408080;
 }
-#box4{
+#box3{
 	background-color: #E03662;
+}
+#talking{
+	height: 75px;
+	width: 330px;
+	margin-top: 10px;
+	margin-right: 100px;
+	margin-left: 100px;
+}
+h4 {
+	text-align: center; 
+	border: 3px solid yellow;
+}
+span {
+	text-align: center;
+}
+#play{
+	background-color: gray;
+	height: 50px;
+	width: 140px;
+	font-size: 30px;
+	margin-left: 10px;
+	float: left;
+}
+#roundCounter{
+	background-color: gray;
+	height: 50px;
+	width: 140px;
+	font-size: 25px;
+	margin-left: 15px;
 }
 
 /**************************************/
