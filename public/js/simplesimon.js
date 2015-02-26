@@ -4,7 +4,7 @@
 buttons = document.getElementsByClassName("buttons");
 var simonSequence = [];
 var userSequence = [];
-var round = 0;
+var round = 1;
 
 var btn0 = document.getElementById("box0");
 var btn1 = document.getElementById("box1");
@@ -21,109 +21,120 @@ var playSimon = function(){
 }
 // GENERATES RANDOM VALUE FOR SIMON TO FOLLOW *******
 //WORKS
-var getSimonSelection = function (randomButton){
-	var simonSelection = Math.floor(Math.random() * 4);
-	console.log(simonSelection + " is Simons new number");
-	// simonSequence.push(simonSelection);
-	console.log(buttons[simonSelection]
-		+ " is simonSelection in buttons.");
-	animateSimon(simonSequence);
-	buttons[simonSelection].style.opacity = "1";
-	var timeoutId = setTimeout (function(){
-	buttons[simonSelection].style.opacity = "0.5";
-	}, 2000);
-	simonSequence.push(simonSelection);
+var getSimonSelection = function (){
+	var newNumber = Math.floor(Math.random() * 4);
+	console.log(newNumber + " is Simons new number");
+	simonSequence.push(newNumber);
 	console.log(simonSequence + " is simons array");
-	if (simonSequence.length == 1){
-		console.log(simonSequence.length + " sequence length");
-	
-		var timeoutId = setTimeout (function(){
-		document.getElementById("roundCounter").innerHTML = "Your turn!";
-		},2000);
-	}
-	animateSimon(simonSequence);
-	// return random;
-}
-function animateSimon(simonSequence){
-	for (var i = 0; i < simonSequence.length; i++){
-		if (simonSequence[i] == "0"){
-			btn0.style.opacity = "1";
-			var timeoutId = setTimeout (function(){
-			btn0.style.opacity = "0.5";
-			}, 2000);
-		} else if (simonSequence[i] == "1"){
-			btn1.style.opacity = "1";
-			var timeoutId = setTimeout (function(){
-			btn1.style.opacity = "0.5";
-			}, 2000);
-		} else if (simonSequence[i] == "2"){
-			btn2.style.opacity = "1";
-			var timeoutId = setTimeout (function(){
-			btn2.style.opacity = "0.5";
-			}, 2000);
-		} else if (simonSequence[i] == "3"){
-			btn3.style.opacity = "1";
-			var timeoutId = setTimeout (function(){
-			btn3.style.opacity = "0.5";
-			}, 2000);
-		} else {usersTurn();
+	round = round + 1;
+	console.log(round + " is round");
+	roundUpdate(round);
+	if (round == 1){
+		console.log("round == 1")
+		yourTurn();
+		if (simonSelection == "0"){
+		buttonFlash(btn0);
+		} else if (simonSelection == "1"){
+		buttonFlash(btn1);
+		} else if (simonSelection == "2"){
+			buttonFlash(btn2);
+		} else if (simonSelection == "3"){
+			buttonFlash(btn3);
 		}
+	} 
+} 
+
+function animateSimon(simonSequence){
+	console.log("in animateSimon");
+	disablePlayer();
+	var i = 0;
+	var simonsTurn = setInterval(function(){
+	if (i < simonSequence.length){
+		var buttonDance = setInterval(function(){
+		if (simonSequence[i] == "0"){
+		buttonFlash(btn0);
+		} else if (simonSequence[i] == "1"){
+		buttonFlash(btn1);
+		} else if (simonSequence[i] == "2"){
+			buttonFlash(btn2);
+		} else if (simonSequence[i] == "3"){
+			buttonFlash(btn3);
+		} else {clearInterval(simonsTurn);
+			usersTurn();
+		}
+		},1000);
 	}
+	i++;
+	enablePlayer();
+	}, 1000);
 }
-function usersTurn (){
+
+function buttonFlash (buttonToFlash){
+	buttonToFlash.style.opacity = "1";
 	var timeoutId = setTimeout (function(){
-	document.getElementById("roundCounter").innerHTML = "Your turn!";
-	},2000);
+	buttonToFlash.style.opacity = "0.5"
+	},800);
+}
+
+
+function usersTurn (){
+	document.getElementById("talk").innerHTML = "Your turn!";
 }
 //ADD USER CHOICE TO USER ARRAY and MODIFIES BUTTON.
 // WORKS
 var userPlays = function(){
-	var userPick = this.value;
-	console.log(userPick);
-	(buttons[userPick].style.opacity = "1");
-	var timeoutId = setTimeout (function(){
-	buttons[userPick].style.opacity = "0.5";
-	}, 2000);
-
+	console.log(this.value + " is users pick");
+	if (this.value == "0"){
+		buttonFlash(btn0);
+		} else if (this.value == "1"){
+		buttonFlash(btn1);
+		} else if (this.value == "2"){
+			buttonFlash(btn2);
+		} else if (this.value == "3"){
+			buttonFlash(btn3);
+		}
 	userSequence.push(this.value);
-	console.log(userSequence + " is users array");
-	compareSequences();
+	console.log(userSequence + " is userSequence in userPlays")
+	compareSequences(userSequence);	
 }
 
-function compareSequences(){
-	for (var i = 0; i < userSequence.length; i++){
-		console.log(userSequence);
-		console.log(simonSequence);
-		if (userSequence[i] == simonSequence[i]){
-			round = round + 1;
-			// console.log(round + " is round count");
-			var timeoutId = setTimeout (function(){
-				document.getElementById("roundCounter").innerHTML = "Round: " + round;
-				},3000);
-		console.log(userSequence + " is userSequence");
-		console.log(simonSequence + " is simonSequence");
+function compareSequences(userSequence, simonSequence){
+		console.log(userSequence + " is in compareSequences");
+		console.log(simonSequence + " is in compareSequences");
+	if (userSequence[i] == 0 || userSequence[i] !== simonSequence[i]){
+		userSequence = [];
+		simonSequence = [];
+		gameOver();
+	} else {
 		continueGame(simonSequence);
-		} else {
-			var timeoutId = setTimeout (function(){
-			document.getElementById("roundCounter")
-			.innerHTML = "Try Again";
-			},3000);
-			round = 0;
-			userSequence = [];
-			simonSequence = [];
-		}
 	}	
 }
+
+function gameOver(){
+	document.getElementById("talk") = "Game Over";
+	var timeoutId = setTimeout(function () {
+    confirm("Game over. Play again?");
+	}, 5000);
+}
+
 function continueGame(simonSequence){
-	console.log(simonSequence + " is simons array");
+	console.log(simonSequence + " is s.array in continueGame");
 	getSimonSelection(simonSequence);
 }
 
-
+function enablePlayer(){
 btn0.addEventListener("click", userPlays, false);
 btn1.addEventListener("click", userPlays, false);
 btn2.addEventListener("click", userPlays, false);
 btn3.addEventListener("click", userPlays, false);
+btnPlay.addEventListener("click", playSimon, false);
+}
+function disablePlayer(){
+btn0.removeEventListener("click", userPlays, false);
+btn1.removeEventListener("click", userPlays, false);
+btn2.removeEventListener("click", userPlays, false);
+btn3.removeEventListener("click", userPlays, false);
+}
 btnPlay.addEventListener("click", playSimon, false);
 
 
