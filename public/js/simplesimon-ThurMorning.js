@@ -90,6 +90,7 @@ function usersTurn (){
 
 var userPlays = function(){
 	var userPick = this.value;
+	var userPlays = setInterval(function(){
 	console.log(userPick + " is users pick");
 	if (this.value == "0"){
 		buttonFlash(btn0);
@@ -102,6 +103,7 @@ var userPlays = function(){
 	} 
 	userSequence.push(this.value);
 	console.log(userSequence + " is users array");
+	
 	compareSequences(userSequence,simonSequence);
 	}
 
