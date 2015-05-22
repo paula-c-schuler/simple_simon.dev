@@ -1,4 +1,5 @@
-
+// Exercise 05.5 Simple Simon Game, JavaScript version 
+// To Be Completed
 
 
 buttons = document.getElementsByClassName("buttons");
@@ -55,7 +56,7 @@ function animateSimon(simonSequence){
 	}, 500);
 }
 
-
+// works
 function buttonFlash (buttonToFlash){
 	
 	buttonToFlash.style.opacity = "1";
@@ -73,30 +74,17 @@ var userPlays = function(){
 	var userPick = this.value;
 	console.log(userPick + " is users pick");
 	userSequence.push(userPick);
-	i = 0;
-	var userTurn = setInterval(function(){
 
-		if (this.value == "0"){
+
+	if (this.value == "0"){
 		buttonFlash(btn0);
-		} else if (this.value == "1"){
-			buttonFlash(btn1);
-		} else if (this.value == "2"){
-			buttonFlash(btn2);
-		} else if (this.value == "3"){
-			buttonFlash(btn3);
-		} 
-		i++;
-	}, 1500);
-
-	// if (this.value == "0"){
-	// 	buttonFlash(btn0);
-	// } else if (this.value == "1"){
-	// 	buttonFlash(btn1);
-	// } else if (this.value == "2"){
-	// 	buttonFlash(btn2);
-	// } else if (this.value == "3"){
-	// 	buttonFlash(btn3);
-	// } 
+	} else if (this.value == "1"){
+		buttonFlash(btn1);
+	} else if (this.value == "2"){
+		buttonFlash(btn2);
+	} else if (this.value == "3"){
+		buttonFlash(btn3);
+	} 
 	
 	console.log(userSequence + " is user array in userPlays");
 	console.log(simonSequence + "simonSequence in userPlays");
@@ -131,26 +119,6 @@ btn1.addEventListener("click", userPlays, false);
 btn2.addEventListener("click", userPlays, false);
 btn3.addEventListener("click", userPlays, false);
 btnPlay.addEventListener("click", getSimonSelection, false);
-
-
-/**************************************/
-
-/*TODO: RANDOMLY SELECT BUTTONS - THEY FADE IN, THEN OUT*/
-//  and variable for the selection array
-/*TODO: USER CAN CLICK THE BUTTON THAT WAS RANDOMIZED*/
-/*TODO: RANDOM SELECT AND THEN USER SELECT AND ADD RANDOM AGAIN*/
-/*TODO: CONTINUE PROCESS UNTIL USER MISSES A BUTTON*/
-/*TODO: INSTALL A CLICK COUNTER FOR USER*/
-// assign variables to hold html elements
-//function to randomly get square
-//listen for user input and decide if true or false
-//count the round if true
-//add to sequence if true
-//recycle game
-//if false, do not count, ask if want to play again
-//timeout to reload page if no response
-//if no response, time out the game
-
 
 
 
