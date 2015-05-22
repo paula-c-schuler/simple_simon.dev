@@ -1,5 +1,5 @@
-//******** SIMPLE SIMON GAME JAVASCRIPT ************
-//SET GLOBAL VARIABLES
+
+
 
 buttons = document.getElementsByClassName("buttons");
 var simonSequence = [];
@@ -13,129 +13,124 @@ var btn3 = document.getElementById("box3");
 var btnPlay = document.getElementById("play");
 
 
-// USER SAYS LETS PLAY ***********************
-//WORKS
-var playSimon = function(){
-	console.log("play is heard");
-	getSimonSelection();
-}
-// GENERATES RANDOM VALUE FOR SIMON TO FOLLOW *******
-//WORKS
+
+// works
 var getSimonSelection = function (){
-	var newNumber = Math.floor(Math.random() * 4);
-	console.log(newNumber + " is Simons new number");
-	simonSequence.push(newNumber);
+	var simonSelection = Math.floor(Math.random() * 4);
+	console.log(simonSelection + " is Simons new number");
+
+	simonSequence.push(simonSelection);
 	console.log(simonSequence + " is simons array");
-	round = round + 1;
-	console.log(round + " is round");
-	roundUpdate(round);
-	if (round == 1){
-		console.log("round == 1")
-		yourTurn();
-		if (simonSelection == "0"){
-		buttonFlash(btn0);
-		} else if (simonSelection == "1"){
-		buttonFlash(btn1);
-		} else if (simonSelection == "2"){
-			buttonFlash(btn2);
-		} else if (simonSelection == "3"){
-			buttonFlash(btn3);
-		}
-	} 
-} 
+
+	round = simonSequence.length;
+	
+	var timeoutId = setTimeout (function(){
+		// document.getElementById("roundCounter").innerHTML = "Score: " + round;
+	},500);
+	animateSimon(simonSequence);
+}
+
 
 function animateSimon(simonSequence){
-	console.log("in animateSimon");
-	disablePlayer();
-	var i = 0;
+	i = 0;
 	var simonsTurn = setInterval(function(){
-	if (i < simonSequence.length){
-		var buttonDance = setInterval(function(){
+
+		
 		if (simonSequence[i] == "0"){
-		buttonFlash(btn0);
+			buttonToFlash = btn0;
+			buttonFlash(buttonToFlash);
 		} else if (simonSequence[i] == "1"){
-		buttonFlash(btn1);
+			buttonToFlash = btn1;
+			buttonFlash(buttonToFlash);
 		} else if (simonSequence[i] == "2"){
-			buttonFlash(btn2);
+			buttonToFlash = btn2;
+			buttonFlash(buttonToFlash);
 		} else if (simonSequence[i] == "3"){
-			buttonFlash(btn3);
-		} else {clearInterval(simonsTurn);
-			usersTurn();
+			buttonToFlash = btn3;
+			buttonFlash(buttonToFlash);
+		} else {
+			clearInterval(simonsTurn);
 		}
-		},1000);
-	}
-	i++;
-	enablePlayer();
-	}, 1000);
+		i++;
+	}, 500);
 }
+
 
 function buttonFlash (buttonToFlash){
+	
 	buttonToFlash.style.opacity = "1";
 	var timeoutId = setTimeout (function(){
-	buttonToFlash.style.opacity = "0.5"
-	},800);
+		buttonToFlash.style.opacity = "0.5"
+	}, 500);
 }
 
 
-function usersTurn (){
-	document.getElementById("talk").innerHTML = "Your turn!";
-}
-//ADD USER CHOICE TO USER ARRAY and MODIFIES BUTTON.
-// WORKS
+
+// Listeners call userPlays
+// Adds user choice to array and calls function to flash button
+// works
 var userPlays = function(){
-	console.log(this.value + " is users pick");
-	if (this.value == "0"){
+	var userPick = this.value;
+	console.log(userPick + " is users pick");
+	userSequence.push(userPick);
+	i = 0;
+	var userTurn = setInterval(function(){
+
+		if (this.value == "0"){
 		buttonFlash(btn0);
 		} else if (this.value == "1"){
-		buttonFlash(btn1);
+			buttonFlash(btn1);
 		} else if (this.value == "2"){
 			buttonFlash(btn2);
 		} else if (this.value == "3"){
 			buttonFlash(btn3);
-		}
-	userSequence.push(this.value);
-	console.log(userSequence + " is userSequence in userPlays")
-	compareSequences(userSequence);	
-}
+		} 
+		i++;
+	}, 1500);
 
-function compareSequences(userSequence, simonSequence){
-		console.log(userSequence + " is in compareSequences");
-		console.log(simonSequence + " is in compareSequences");
-	if (userSequence[i] == 0 || userSequence[i] !== simonSequence[i]){
-		userSequence = [];
-		simonSequence = [];
-		gameOver();
-	} else {
-		continueGame(simonSequence);
-	}	
-}
+	// if (this.value == "0"){
+	// 	buttonFlash(btn0);
+	// } else if (this.value == "1"){
+	// 	buttonFlash(btn1);
+	// } else if (this.value == "2"){
+	// 	buttonFlash(btn2);
+	// } else if (this.value == "3"){
+	// 	buttonFlash(btn3);
+	// } 
+	
+	console.log(userSequence + " is user array in userPlays");
+	console.log(simonSequence + "simonSequence in userPlays");
+	compareSequences(userPick);
 
-function gameOver(){
-	document.getElementById("talk") = "Game Over";
-	var timeoutId = setTimeout(function () {
-    confirm("Game over. Play again?");
-	}, 5000);
-}
+}		
 
-function continueGame(simonSequence){
-	console.log(simonSequence + " is s.array in continueGame");
-	getSimonSelection(simonSequence);
-}
+function compareSequences(userPick){
+	console.log(userSequence + " is user array in compare function");
+	console.log(simonSequence + " is simon in compare function");
+		
+	if (userSequence !== simonSequence){
+		var timeoutId = setTimeout (function(){
+			alert("Game over.");
+			location.reload();
+		}, 3000);
+	} else 
+		var timeoutId = setTimeout (function(){
+			document.getElementById("play").innerHTML = "YAY!" + round;
+		},500);
+		// getSimonSelection();
+}	
 
-function enablePlayer(){
+// function continueGame(simonSequence){
+// 	console.log(simonSequence + " is simons array");
+// 	getSimonSelection();
+// }
+
+
 btn0.addEventListener("click", userPlays, false);
 btn1.addEventListener("click", userPlays, false);
 btn2.addEventListener("click", userPlays, false);
 btn3.addEventListener("click", userPlays, false);
-btnPlay.addEventListener("click", playSimon, false);
-}
-function disablePlayer(){
-btn0.removeEventListener("click", userPlays, false);
-btn1.removeEventListener("click", userPlays, false);
-btn2.removeEventListener("click", userPlays, false);
-btn3.removeEventListener("click", userPlays, false);
-}
-btnPlay.addEventListener("click", playSimon, false);
+btnPlay.addEventListener("click", getSimonSelection, false);
 
 
 /**************************************/
