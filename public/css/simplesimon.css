@@ -25,16 +25,16 @@ body {
 	float: left;
 	opacity: .5 ;
 }
-#box0{
+#purple {
 	background-color: #9F70B9;
 }
-#box1{
+#blue {
 	background-color: #6C55E0;
 }
-#box2{
+#green {
 	background-color: #408080;
 }
-#box3{
+#pink {
 	background-color: #E03662;
 }
 #talking{
@@ -51,20 +51,22 @@ h2 {
 span {
 	text-align: center;
 }
-#play{
+#start {
 	background-color: gray;
 	height: 50px;
 	width: 140px;
 	font-size: 30px;
 	margin-left: 10px;
 	float: left;
+	opacity: 0.5;
 }
-#roundCounter{
+#score{
 	background-color: gray;
 	height: 50px;
 	width: 140px;
 	font-size: 25px;
 	margin-left: 15px;
+	opacity: 0.5;
 }
 
 /**************************************/
