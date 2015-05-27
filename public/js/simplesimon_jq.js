@@ -2,6 +2,7 @@
 // To Be Completed
 $(document).ready(function() {
     // alert( 'The DOM has finished loading!' );
+    "use strict";
 
 	var simonSequence = [];
 	var userSequence = [];
@@ -83,7 +84,7 @@ $(document).ready(function() {
 	    $(this).fadeTo(1000, 1.0);
 	    $(this).fadeTo(1000, 0.5);
 
-	    compare(userSequence);
+	    compare(userSequence, simonSequence);
 	});
 
 	$('#blue').click(function() {
@@ -91,21 +92,21 @@ $(document).ready(function() {
 		console.log(userSequence + " is userSequence");
 	    $('#blue').fadeTo(1000, 1.0);
 	    $('#blue').fadeTo(1000, 0.5);
-	    compare(userSequence);
+	    compare(userSequence, simonSequence);
 	});
 	$('#green').click(function() {
 		userSequence.push("2");
 		console.log(userSequence + " is userSequence");
 		$('#green').fadeTo(1000, 1.0);
 	    $('#green').fadeTo(1000, 0.5);
-	    compare(userSequence);
+	    compare(userSequence, simonSequence);
 	});
 	$('#pink').click(function() {
 		userSequence.push("3");
 		console.log(userSequence + " is userSequence");
 	    $('#pink').fadeTo(1000, 1.0);
 	    $('#pink').fadeTo(1000, 0.5);
-	    compare(userSequence);
+	    compare(userSequence, simonSequence);
 	});
 	
 
