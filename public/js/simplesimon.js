@@ -60,13 +60,16 @@ function buttonFlash (buttonToFlash) {
 	}, 500 );
 }
 
-// Listeners call userPlays
+
 // Adds user choice to array and calls function to flash button
 // works
+// *** I WANT TO: FIND A WAY TO USE THE LISTENING OF CLICKS TO BE
+// THE INDEX BY WHICH EACH CLICK IS COMPARED TO THE SIMON SEQUENCE
+// IN THE COMPARE FUNCTION INSTEAD OF COMPARING BOTH WHOLE ARRAYS.
 var userPlays = function() {
 	var userPick = this.value;
-	click = click + 1;
-	console.log(click + " is click value");
+	// click = click + 1;
+	// console.log(click + " is click value");
 	console.log(userPick + "is userPick");
 	
 	if (userPick == "0") {
@@ -98,10 +101,8 @@ var userPlays = function() {
 }	
 
 
-// Should get a match or no match for each user button push
-// On second or third turn, the function stops matching properly
-var compare = function(simonSequence, userSequence) {
-	// console.log(simonSequence + " is in compare");	 
+// works, compares both full arrays and records score
+var compare = function(simonSequence, userSequence) {	 
 	// console.log(click + " is click in compare");
 
 	if (userSequence.length == simonSequence.length) {
@@ -109,12 +110,11 @@ var compare = function(simonSequence, userSequence) {
 		var timeoutId = setTimeout (function() {
 				// getSimonSelection(simonSequence);
 				document.getElementById("clicks").innerHTML = "Player: " + userSequence.length;
-		}, 500 );
+		}, 300 );
 	} else {
 	alert("Game Over");
 	}
 }
-
 
 
 purple.addEventListener("click", userPlays, false);
