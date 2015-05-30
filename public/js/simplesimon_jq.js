@@ -6,29 +6,26 @@ $(document).ready(function() {
 
 	var simonSequence = [];
 	var userSequence = [];
+	var colors = ["purple", "blue", "green", "pink"];
 
-	var btn0 = $("#purple");
-	var btn1 = $("#blue");
-	var btn2 = $("#green");
-	var btn3 = $("#pink"); 
+	var purple = $("#purple");
+	var blue = $("#blue");
+	var green = $("#green");
+	var pink = $("#pink"); 
 	var start = $("#start");
 	var score = 0;
 
 // Gets a random number and stores it in an array
 	var getSimonSelection = function() {
-		var simonSelection = Math.floor(Math.random() * 4);
-		// console.log(simonSelection + " is Simons random");
-		if (simonSelection == 0) {
-			simonSequence.push("0");
-		} else if (simonSelection == 1) {
-			simonSequence.push("1");
-		} else if (simonSelection == 2) {
-			simonSequence.push("2");
-		} else if (simonSelection == 3) {
-			simonSequence.push("3");
-		} 
+		var simonSelection = colors[Math.floor(Math.random() * 4)];
+		console.log(simonSelection + " is Simons random");
+		
+		simonSequence.push(simonSelection);
+		
 		console.log(simonSequence + " is simonSequence");
+		var timeoutId = setTimeout (function() {
 		playSimonSequence(simonSequence);
+		}, 1000 );
 	}
 
 // Plays the buttons of Simon's array
@@ -37,19 +34,19 @@ $(document).ready(function() {
 
 		for (var i = 0; i < simonSequence.length; i++) {
 			// console.log([i]);
-			if (simonSequence[i] == "0") {
+			if (simonSequence[i] == "purple") {
 				console.log(simonSequence[i]);
 				$('#purple').fadeTo(1000, 1.0);
 	    		$('#purple').fadeTo(1000, 0.5);
-			} else if (simonSequence[i] == "1") {
+			} else if (simonSequence[i] == "blue") {
 				console.log(simonSequence[i]);
 				$('#blue').fadeTo(1000, 1.0);
 	    		$('#blue').fadeTo(1000, 0.5);
-			} else if (simonSequence[i] == "2") {
+			} else if (simonSequence[i] == "green") {
 				console.log(simonSequence[i]);
 				$('#green').fadeTo(1000, 1.0);
 	    		$('#green').fadeTo(1000, 0.5);
-			} else if (simonSequence[i] == "3") {
+			} else if (simonSequence[i] == "pink") {
 				console.log(simonSequence[i]);
 				$('#pink').fadeTo(1000, 1.0);
 	    		$('#pink').fadeTo(1000, 0.5);

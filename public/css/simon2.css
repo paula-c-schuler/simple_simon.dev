@@ -1,0 +1,87 @@
+html {
+	box-sizing: border-box;
+}
+*, *:before, *:after {
+    box-sizing: inherit;
+}
+
+
+#game-background {
+	width: 520px;
+	height: 520px;
+	padding: 10px;
+	margin: 0 auto;
+	border-radius: 50px;
+	background-color: #6C6C6C;
+	text-align: center;
+}
+
+.button-box {
+	width: 250px;
+	height: 250px;
+	border: 1px solid black;
+	float: left;
+}
+
+.buttons {
+	width: 250px;
+	height: 250px;
+	/*float: left;*/
+	/*margin-left: 20px;*/
+
+}
+
+.center {
+	width: 100px;
+	height: 100px;
+	z-index: 1;
+	background-color: #fff;
+}
+
+#green0 {
+	background-color: #0FBB20;
+	border-radius: 250px 0px 100px 0px;
+	border: 1px solid black;
+}
+
+#center0 {
+	top: 150px;
+	left: 150px;
+	position: relative;
+	border-radius: 100px 0px 0px 0px;
+}
+
+#red1 {
+	background-color: #FF3F2C;
+	border-radius: 0px 250px 0px 0px;
+}
+
+#center1 {
+	top: 150px;
+	position: relative;
+	border-radius: 0px 100px 0px 0px;
+}
+
+#blue2 {
+	background-color: #02AEF8;
+	border-radius: 0px 0px 0px 250px;
+}
+
+#center2 {
+	left: 150px;
+	position: relative;
+	border-radius: 0px 0px 100px 0px;
+}
+
+#yellow3 {
+	background-color: #FFFF01;
+	border-radius: 0px 0px 250px 0px;
+}
+
+#center3 {
+	border-radius: 0px 0px 0px 100px;
+}
+
+
+
+
