@@ -3,12 +3,8 @@
 
 var simonSequence = [];
 var userSequence = [];
-var click;
+var click = 0;
 
-var btn0 = document.getElementById("purple");
-var btn1 = document.getElementById("blue");
-var btn2 = document.getElementById("green");
-var btn3 = document.getElementById("pink"); 
 var start = document.getElementById("start");
 var purple = document.getElementById("purple");
 var blue = document.getElementById("blue");
@@ -20,10 +16,9 @@ var clicksDisplay = document.getElementById("clicks");
 // works
 var getSimonSelection = function () {
 	var simonSelection = colors[Math.floor(Math.random() * 4)];
-	// console.log(simonSelection + " is Simons new number");
 
 	simonSequence.push(simonSelection);
-	// console.log(simonSequence + " is simons array");
+	
 	i = 0;
 	var timeoutId = setTimeout (function() {
 		playSimonSequence(simonSequence);
@@ -32,20 +27,19 @@ var getSimonSelection = function () {
 
 // works
 function playSimonSequence(simonSequence) {
-	// console.log(simonSequence);
-	// console.log(simonSequence.length);
+
 	if (i < simonSequence.length) {
 		if (simonSequence[i] == "purple") {
-			buttonToFlash = btn0;
+			buttonToFlash = purple;
 			buttonFlash(buttonToFlash);		
 		} else if (simonSequence[i] == "blue") {
-			buttonToFlash = btn1;
+			buttonToFlash = blue;
 			buttonFlash(buttonToFlash);
 		} else if (simonSequence[i] == "green") {
-			buttonToFlash = btn2;
+			buttonToFlash = green;
 			buttonFlash(buttonToFlash);		
 		} else if (simonSequence[i] == "pink") {
-			buttonToFlash = btn3;
+			buttonToFlash = pink;
 			buttonFlash(buttonToFlash);		
 		} 
 		i++;
@@ -53,15 +47,13 @@ function playSimonSequence(simonSequence) {
 			playSimonSequence(simonSequence);
 			userSequence = [];
 		}, 1000 );
-	} else {
-		click = 0;
-	}
+	} 
 }
 
 
 // works for user and simon
 function buttonFlash (buttonToFlash) {
-	// console.log("in Flash");
+	
 	buttonToFlash.style.opacity = "1";
 	var timeoutId = setTimeout (function() {
 		buttonToFlash.style.opacity = "0.5"
@@ -73,55 +65,64 @@ function buttonFlash (buttonToFlash) {
 // works
 var userPlays = function() {
 	var userPick = this.value;
-	// console.log(userPick + "is userPick");
+	click = click + 1;
+	console.log(click + " is click value");
+	console.log(userPick + "is userPick");
 	
 	if (userPick == "0") {
-		buttonFlash(btn0);
+		buttonFlash(purple);
 		userPick = "purple";
 		userSequence.push("purple");
-		// console.log(userSequence);
+		
 	} else if (userPick == "1") {
-		buttonFlash(btn1);
+		buttonFlash(blue);
 		userPick = "blue";
 		userSequence.push("blue");
-		// console.log(userSequence);
+		
 	} else if (userPick == "2") {
-		buttonFlash(btn2);
+		buttonFlash(green);
 		userPick = "green";
 		userSequence.push("green");
-		// console.log(userSequence);
+		
 	} else if (userPick == "3") {
-		buttonFlash(btn3);
+		buttonFlash(pink);
 		userPick = "pink";
 		userSequence.push("pink");
-		// console.log(userSequence);
+		
 	} 
 	console.log(userSequence + " is user array in userPlays");
 	console.log(simonSequence + " is simonSequence in userPlays");
-	compare(simonSequence, userPick, click);
-}		
+	var timeoutId = setTimeout (function() {
+		compare(simonSequence, userSequence);
+	}, 4000 );
+}	
+
 
 // Should get a match or no match for each user button push
-// Only getting one match so far 
-var compare = function(simonSequence, userPick, click) {
-	console.log(simonSequence + " is in compare");
-	console.log(click + " is click");
-	if (userSequence[click] == simonSequence[click]) {
-		console.log("Match in compare");
-		click++;
-		if (userSequence.length == simonSequence.length)
-			console.log("Full match.");
+// On second or third turn, the function stops matching properly
+var compare = function(simonSequence, userSequence) {
+	// console.log(simonSequence + " is in compare");	 
+	// console.log(click + " is click in compare");
+
+	if (userSequence.length == simonSequence.length) {
+		console.log("Full match.");
+		var timeoutId = setTimeout (function() {
+				// getSimonSelection(simonSequence);
+				document.getElementById("clicks").innerHTML = "Player: " + userSequence.length;
+		}, 500 );
 	} else {
-		alert("Game Over");
+	alert("Game Over");
 	}
 }
-	
 
-btn0.addEventListener("click", userPlays, false);
-btn1.addEventListener("click", userPlays, false);
-btn2.addEventListener("click", userPlays, false);
-btn3.addEventListener("click", userPlays, false);
+
+
+purple.addEventListener("click", userPlays, false);
+blue.addEventListener("click", userPlays, false);
+green.addEventListener("click", userPlays, false);
+pink.addEventListener("click", userPlays, false);
 start.addEventListener("click", getSimonSelection, false);
+
 
 
 
